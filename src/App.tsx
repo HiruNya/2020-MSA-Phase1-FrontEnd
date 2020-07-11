@@ -1,15 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
-import {Container} from "@material-ui/core"
+import {Container, Grid} from "@material-ui/core"
 import SearchBar from "./SearchBar";
 import AnimeGrid from "./AnimeGrid";
+import {AnimeEntry, search} from "./api";
 
 function App() {
+  const [anime, setAnime] = useState<AnimeEntry[]>([]);
+
+  function searchAnime(query: string) {
+    search(query, [])
+      .then(json => setAnime(json))
+  }
+
   return (
     <div className="App">
       <Container maxWidth="lg">
-        <SearchBar />
-        <AnimeGrid anime={["Boku no Hero Acadamia", "Naruto"]} />
+        <Grid direction={"column"} spacing={5} container>
+          <Grid item xs>
+            <SearchBar searchFunction={searchAnime} />
+          </Grid>
+          <Grid item xs>
+            <AnimeGrid anime={anime} />
+          </Grid>
+        </Grid>
       </Container>
     </div>
   )

@@ -1,12 +1,22 @@
 import {Button, Grid, InputAdornment, TextField} from "@material-ui/core";
 import Search from "@material-ui/icons/Search";
-import React from "react";
+import React, {useState} from "react";
 
-function SearchBar(): React.ReactElement {
+type SearchFunction = (query: string) => void;
+
+function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement {
+  const [searchText, setSearchText] = useState("")
+
+  function onClick(): void {
+    props.searchFunction(searchText)
+  }
+
   return (
     <Grid container direction="row" alignItems={"center"}>
       <Grid item xs>
         <TextField
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
           label={"Search"}
           InputProps={{
             startAdornment: (
@@ -20,7 +30,7 @@ function SearchBar(): React.ReactElement {
         />
       </Grid>
       <Grid item xs={1}>
-        <Button variant="contained" color="primary">Search</Button>
+        <Button variant="contained" color="primary" onClick={onClick} >Search</Button>
       </Grid>
     </Grid>
   )
