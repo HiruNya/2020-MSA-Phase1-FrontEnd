@@ -9,11 +9,16 @@ type SearchFunction = (query: string, genres: string[]) => void
 
 function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement {
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set())
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(null)
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(GENRES[0])
   const [searchText, setSearchText] = useState("")
 
   function onClick(): void {
     props.searchFunction(searchText, Array.from(selectedGenres))
+  }
+
+  if (selectedGenre == null) {
+    const genre = GENRES.filter(g => !selectedGenres.has(g))[0]
+    setSelectedGenre((genre)? genre: "")
   }
 
   function onGenreSelect(): void {
@@ -22,6 +27,16 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
       newSet.add(selectedGenre)
       setSelectedGenres(newSet)
       setSelectedGenre(null)
+    }
+  }
+
+  function onGenreRemove(g: string): () => void {
+    return () => {
+      setSelectedGenres((oldGenres) => {
+        const genres = new Set(oldGenres)
+        genres.delete(g)
+        return genres
+      })
     }
   }
 
@@ -61,6 +76,7 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
               value={selectedGenre}
               onChange={event => setSelectedGenre(event.target.value)}
               select
+              disabled={selectedGenre === ""}
               variant="outlined"
               style={{width: "100%"}}
             >
@@ -76,7 +92,7 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
         <div className="fill expand-when-small space">
           <div className={"tag-list"}>
             { Array.from(selectedGenres.values())
-              .map(g => <Chip label={g} />) }
+              .map(g => <Chip label={g} onDelete={onGenreRemove(g)} key={g} />) }
           </div>
         </div>
       </div>
