@@ -25,7 +25,6 @@ const GENRES = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "H
 
 
 function options(query: string, genres: string[]): RequestInit {
-  console.log(genres)
   return {
     method: "POST",
     headers: {

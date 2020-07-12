@@ -1,7 +1,7 @@
 import {Button, Chip, IconButton, InputAdornment, MenuItem, TextField, Typography} from "@material-ui/core"
 import Search from "@material-ui/icons/Search"
 import {Add} from "@material-ui/icons"
-import React, {useState} from "react"
+import React, {FormEvent, useState} from "react"
 import {GENRES} from "./api"
 import "./SearchBar.css"
 
@@ -12,7 +12,8 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
   const [selectedGenre, setSelectedGenre] = useState<string | null>(GENRES[0])
   const [searchText, setSearchText] = useState("")
 
-  function onClick(): void {
+  function onSubmit(event: FormEvent): void {
+    event.preventDefault()
     props.searchFunction(searchText, Array.from(selectedGenres))
   }
 
@@ -41,7 +42,7 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
   }
 
   return (
-    <div className="container" style={{flexDirection: "column"}}>
+    <form onSubmit={onSubmit} className="container" style={{flexDirection: "column"}}>
       <div className="container search-row wrap expand-when-small">
         <div className="space fill">
           <TextField
@@ -61,7 +62,7 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
           />
         </div>
         <div className="space expand-when-small">
-          <Button variant="contained" color="primary" onClick={onClick} className="expand-when-small">Search</Button>
+          <Button variant="contained" color="primary" type="submit" className="expand-when-small">Search</Button>
         </div>
       </div>
       <div className="container search-row space fill wrap">
@@ -96,7 +97,7 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
           </div>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
 
