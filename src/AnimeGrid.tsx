@@ -1,15 +1,14 @@
 import React, {useState} from "react"
-import {Accordion, AccordionDetails, AccordionSummary, Card, CardContent, CardMedia, Collapse, GridList, GridListTile,
-        Typography} from "@material-ui/core";
-import {ExpandMore} from "@material-ui/icons";
-import {AnimeEntry} from "./api";
+import {Accordion, AccordionDetails, AccordionSummary, Card, CardContent, CardMedia, Collapse, Typography} from "@material-ui/core"
+import {ExpandMore} from "@material-ui/icons"
+import {AnimeEntry} from "./api"
 
-function AnimeTile(props: { anime: AnimeEntry }): React.ReactElement {
+function AnimeTile(props: {anime: AnimeEntry}): React.ReactElement {
   const [expanded, setExpanded] = useState(false)
-
   const anime = props.anime
+
   return (
-    <GridListTile key={anime.title} style={{height: "100%"}} onClick={_ => setExpanded(expanded => !expanded)}>
+    <div style={{width: "33%"}} onClick={_ => setExpanded(expanded => !expanded)}>
       <Card variant="outlined">
         <Collapse in={!expanded}>
           <CardMedia
@@ -34,15 +33,15 @@ function AnimeTile(props: { anime: AnimeEntry }): React.ReactElement {
           </Accordion>
         </CardContent>
       </Card>
-    </GridListTile>
+    </div>
   )
 }
 
 function AnimeGrid(props: { anime: AnimeEntry[] }): React.ReactElement {
   return (
-    <GridList cols={4}>
-      {props.anime.map(a => AnimeTile({anime: a}))}
-    </GridList>
+    <div style={{display: "flex", flexWrap: "wrap"}}>
+      {props.anime.map((a) => <AnimeTile anime={a} />)}
+    </div>
   )
 }
 

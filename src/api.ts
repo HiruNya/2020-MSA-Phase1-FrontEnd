@@ -3,7 +3,7 @@ const ANILIST_URL: string = "https://graphql.anilist.co"
 
 const QUERY: string = `
 query ($query: String, $genres: [String]) {
-  Page(page: 0, perPage: 10) {
+  Page(page: 0, perPage: 12) {
     media(search: $query, genre_in: $genres, type: ANIME) {
       coverImage {
         medium
@@ -19,7 +19,13 @@ query ($query: String, $genres: [String]) {
 }
 `
 
+const GENRES = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha",
+  "Music", "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice Of Life", "Sport", "Supernatural", "Thriller",
+  "Hentai"]
+
+
 function options(query: string, genres: string[]): RequestInit {
+  console.log(genres)
   return {
     method: "POST",
     headers: {
@@ -29,8 +35,8 @@ function options(query: string, genres: string[]): RequestInit {
     body: JSON.stringify({
       query: QUERY,
       variables: {
-        query,
-        genres: (genres.length)? genres: null
+        query: (query !== "")? query: null,
+        genres: (genres.length > 0)? genres: null
       }
     })
   }
@@ -82,4 +88,4 @@ async function search(query: string, genres: string[]): Promise<AnimeEntry[]> {
     .then(json => json.data.Page.media.map(fromRawAnimeEntry))
 }
 
-export {search};
+export {GENRES, search};

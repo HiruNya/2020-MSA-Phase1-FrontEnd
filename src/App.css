@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .App-Body {
@@ -12,4 +12,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.tagList {
+  display: inline-block;
+  list-style: none;
+}
+
+.tagList * {
+  margin: 2.5px;
 }
