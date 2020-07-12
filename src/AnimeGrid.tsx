@@ -8,7 +8,7 @@ function AnimeTile(props: {anime: AnimeEntry}): React.ReactElement {
   const anime = props.anime
 
   return (
-    <div style={{width: "33%"}} onClick={_ => setExpanded(expanded => !expanded)}>
+    <div className="anime-tile" onClick={_ => setExpanded(expanded => !expanded)}>
       <Card variant="outlined">
         <Collapse in={!expanded}>
           <CardMedia

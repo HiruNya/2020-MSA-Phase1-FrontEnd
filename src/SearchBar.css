@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.search-row {
+  width: 100%;
+}
+
+.space {
+  margin: 5px;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.fill {
+  flex: auto;
+}
+
+@media (max-width: 500px) {
+  .expand-when-small {
+    width: 100%;
+    justify-content: center;
+  }
+}

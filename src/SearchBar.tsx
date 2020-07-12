@@ -1,8 +1,9 @@
-import {Button, Chip, Grid, IconButton, InputAdornment, MenuItem, TextField, Typography} from "@material-ui/core"
+import {Button, Chip, IconButton, InputAdornment, MenuItem, TextField, Typography} from "@material-ui/core"
 import Search from "@material-ui/icons/Search"
 import {Add} from "@material-ui/icons"
 import React, {useState} from "react"
 import {GENRES} from "./api"
+import "./SearchBar.css"
 
 type SearchFunction = (query: string, genres: string[]) => void
 
@@ -25,9 +26,9 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
   }
 
   return (
-    <Grid container direction="column" spacing={1}>
-      <Grid container item direction="row" alignItems={"center"}>
-        <Grid item xs>
+    <div className="container" style={{flexDirection: "column"}}>
+      <div className="container search-row wrap expand-when-small">
+        <div className="space fill">
           <TextField
             value={searchText}
             onChange={(event) => setSearchText(event.target.value)}
@@ -39,44 +40,47 @@ function SearchBar(props: {searchFunction: SearchFunction}): React.ReactElement 
                 </InputAdornment>
               )
             }}
-            placeholder={"Pokemon, Naruto, Dragon Ball Z, etc."}
-            style={{width: "100%"}}
+            placeholder={"Pokemon, Naruto, etc."}
+            className="search-row"
             variant="outlined"
           />
-        </Grid>
-        <Grid item xs={1}>
-          <Button variant="contained" color="primary" onClick={onClick} >Search</Button>
-        </Grid>
-      </Grid>
-      <Grid container item direction="row" alignItems={"center"} spacing={1}>
-        <Grid item>
-          <Typography variant="body1">
-            Add Genre:
-          </Typography>
-        </Grid>
-        <Grid item>
-          <TextField
-            value={selectedGenre}
-            onChange={event => setSelectedGenre(event.target.value)}
-            select
-            variant="outlined"
-          >
-            {GENRES
-              .filter(g => !selectedGenres.has(g))
-              .map(g => (<MenuItem key={g} value={g}>{g}</MenuItem>))}
-          </TextField>
-        </Grid>
-        <Grid item>
-          <IconButton color="secondary" onClick={onGenreSelect}><Add /></IconButton>
-        </Grid>
-        <Grid item xs>
-          <div className={"tagList"}>
+        </div>
+        <div className="space expand-when-small">
+          <Button variant="contained" color="primary" onClick={onClick} className="expand-when-small">Search</Button>
+        </div>
+      </div>
+      <div className="container search-row space fill wrap">
+        <div className="container expand-when-small">
+          <div>
+            <Typography variant="body1">
+              Add Genre:
+            </Typography>
+          </div>
+          <div className="space fill">
+            <TextField
+              value={selectedGenre}
+              onChange={event => setSelectedGenre(event.target.value)}
+              select
+              variant="outlined"
+              style={{width: "100%"}}
+            >
+              {GENRES
+                .filter(g => !selectedGenres.has(g))
+                .map(g => (<MenuItem key={g} value={g}>{g}</MenuItem>))}
+            </TextField>
+          </div>
+          <div>
+            <IconButton color="secondary" onClick={onGenreSelect}><Add /></IconButton>
+          </div>
+        </div>
+        <div className="fill expand-when-small space">
+          <div className={"tag-list"}>
             { Array.from(selectedGenres.values())
               .map(g => <Chip label={g} />) }
           </div>
-        </Grid>
-      </Grid>
-    </Grid>
+        </div>
+      </div>
+    </div>
   )
 }
 

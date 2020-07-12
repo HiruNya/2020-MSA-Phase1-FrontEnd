@@ -14,11 +14,30 @@
   color: white;
 }
 
-.tagList {
+.tag-list {
   display: inline-block;
   list-style: none;
 }
 
-.tagList * {
-  margin: 2.5px;
+.tag-list * {
+  margin: 3px;
+}
+
+.anime-tile {
+  width: 100%;
+}
+@media (min-width: 450px) {
+  .anime-tile {
+    width: 50%;
+  }
+}
+@media (min-width: 800px) {
+  .anime-tile {
+    width: 33%;
+  }
+}
+@media (min-width: 1300px) {
+  .anime-tile {
+    width: 25%;
+  }
 }
