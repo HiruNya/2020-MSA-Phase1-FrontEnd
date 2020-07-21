@@ -20,8 +20,7 @@ query ($query: String, $genres: [String]) {
 `
 
 const GENRES = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha",
-  "Music", "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice Of Life", "Sport", "Supernatural", "Thriller",
-  "Hentai"]
+  "Music", "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice Of Life", "Sport", "Supernatural", "Thriller"]
 
 
 function options(query: string, genres: string[]): RequestInit {
