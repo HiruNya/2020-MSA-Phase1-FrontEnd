@@ -11,7 +11,7 @@ pool:
 
 variables:
   rootDir: '2020-MSA-Phase1-FrontEnd'
-  buildDir: '$(rootDir)/build'
+  buildDir: 'build'
 
 steps:
 - task: NodeTool@0
