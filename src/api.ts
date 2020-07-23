@@ -2,9 +2,9 @@
 const ANILIST_URL: string = "https://graphql.anilist.co"
 
 const QUERY: string = `
-query ($query: String, $genres: [String]) {
+query ($query: String, $genres: [String], $nsfw: Boolean) {
   Page(page: 0, perPage: 12) {
-    media(search: $query, genre_in: $genres, type: ANIME) {
+    media(search: $query, genre_in: $genres, type: ANIME, isAdult: $nsfw) {
       coverImage {
         medium
         large
@@ -34,7 +34,8 @@ function options(query: string, genres: string[]): RequestInit {
       query: QUERY,
       variables: {
         query: (query !== "")? query: null,
-        genres: (genres.length > 0)? genres: null
+        genres: (genres.length > 0)? genres: null,
+        nsfw: false
       }
     })
   }
