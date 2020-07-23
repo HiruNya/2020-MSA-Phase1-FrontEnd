@@ -13,7 +13,7 @@ Written in/using:
 
 ## Build Pipeline
 
-The Azure Pipeline is triggered whenever a commit occurs to the master or develop branch.
+The Azure Pipeline is triggered whenever a commit occurs to the `master` or `develop` branch.
 The pipeline will:
 
 - Install Node and npm.
@@ -22,6 +22,8 @@ The pipeline will:
 - Publish the built artifact.
 
 Then the zipped artifact will be deployed onto an Azure web service.
+
+(The pipeline is not triggered when the only files changed in a commit is the `README.md` file or `screenshots/` folder.)
 
 ## Screenshots
 
