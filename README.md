@@ -21,9 +21,13 @@ The pipeline will:
 - Archive the `build/` folder into a `zip`.
 - Publish the built artifact.
 
-Then the zipped artifact will be deployed onto an Azure web service.
+Then, if the pipeline was triggered by the `master` branch,
+the zipped artifact will be deployed onto an Azure web service.
 
-(The pipeline is not triggered when the only files changed in a commit is the `README.md` file or `screenshots/` folder.)
+(The build pipeline is not triggered when the only files changed in a commit
+are the `README.md` file or `screenshots/` folder.
+This is because these files are not used in the build
+and thus it does not matter if they are changed.)
 
 ## Screenshots
 
